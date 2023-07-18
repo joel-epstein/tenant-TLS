@@ -35,26 +35,26 @@ Kiwi: gsl.#Service & {
 			//  NOTE: this must be filled out by a user. Impersonation allows other services to act on the behalf of identities
 			//  inside the system. Please uncomment if you wish to enable impersonation. If the servers list if left empty,
 			//  all traffic will be blocked.
-				// filters: [
+				filters: [
 			//    gsl.#ImpersonationFilter & {
 			// 		#options: {
 			// 			servers: "CN=alec.holmes,OU=Engineering,O=Decipher Technology Studios,L=Alexandria,ST=Virginia,C=US"
 			// 			caseSensitive: false
 			// 		}
 			//    }
-				// 	gsl.#FaultInjectionFilter & {
-				// 		#options: {
-				// 			abort: {
-				// 				// header_abort: {} // Headers can also specify the percentage of requests to fail, capped by the below value with the x-envoy-fault-abort-request-percentage header
-				// 				percentage: {
-				// 					numerator: 10
-				// 					denominator: "HUNDRED"
-				// 				}
-				// 				http_status: 404
-				// 			}
-				// 		}
-				// 	}
-				// ]
+					gsl.#FaultInjectionFilter & {
+						#options: {
+							abort: {
+								// header_abort: {} // Headers can also specify the percentage of requests to fail, capped by the below value with the x-envoy-fault-abort-request-percentage header
+								percentage: {
+									numerator: 50
+									denominator: "HUNDRED"
+								}
+								http_status: 404
+							}
+						}
+					}
+				]
 			routes: {
 				"/": {
 					
